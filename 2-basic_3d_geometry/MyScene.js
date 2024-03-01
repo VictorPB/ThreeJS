@@ -7,6 +7,10 @@ import { Stats } from '../libs/stats.module.js'
 // Classes for the scene
 import { Box } from './Box.js'
 import { Cone } from './Cone.js'
+import { Cylinder } from './Cylinder.js'
+import { Sphere } from './Sphere.js'
+import { Torus } from './Torus.js'
+import { Icosahedron } from './Icosahedron.js'
 
 
 // We will use a class derived from Three.js Scene class to manage the scene and everything that happens in it.
@@ -52,26 +56,54 @@ class MyScene extends THREE.Scene {
         this.box.position.set (4,0,0);
         this.add (this.box);
 
+        this.boxAxis = new THREE.AxesHelper (2);
+        this.boxAxis.position.set (4,0,0);
+        this.add (this.boxAxis);
+
         // Cone
         this.cone = new Cone(this.gui, "Cone Controls");
         this.cone.position.set (4,4,0);  
         this.add (this.cone);
 
+        this.coneAxis = new THREE.AxesHelper (2);
+        this.coneAxis.position.set (4,4,0);
+        this.add (this.coneAxis);
+
         // Cylinder
-        //this.cylinder = new Cylinder(this.gui, "Cylinder Controls");  
-        //this.add (this.cylinder);
+        this.cylinder = new Cylinder(this.gui, "Cylinder Controls");
+        this.cylinder.position.set (0,4,0);   
+        this.add (this.cylinder);
+
+        this.cylinderAxis = new THREE.AxesHelper (2);
+        this.cylinderAxis.position.set (0,4,0);
+        this.add (this.cylinderAxis);
 
         // Sphere
-        //this.sphere = new Sphere(this.gui, "Sphere Controls");  
-        //this.add (this.sphere);
+        this.sphere = new Sphere(this.gui, "Sphere Controls"); 
+        this.sphere.position.set (0,4,4); 
+        this.add (this.sphere);
+
+        this.sphereAxis = new THREE.AxesHelper (2);
+        this.sphereAxis.position.set (0,4,4);
+        this.add (this.sphereAxis);
 
         // Torus
-        //this.torus = new Torus(this.gui, "Torus Controls");  
-        //this.add (this.torus);
+        this.torus = new Torus(this.gui, "Torus Controls");
+        this.torus.position.set (0,0,4); 
+        this.add (this.torus);
 
-        // Isocahedron
-        //this.isocahedron = new Isocahedron(this.gui, "Isocahedron Controls");  
-        //this.add (this.isocahedron);
+        this.torusAxis = new THREE.AxesHelper (2);
+        this.torusAxis.position.set (0,0,4);
+        this.add (this.torusAxis);
+
+        // Icosahedron
+        this.icosahedron = new Icosahedron(this.gui, "Icosahedron Controls");  
+        this.icosahedron.position.set (4,0,4); 
+        this.add (this.icosahedron);
+
+        this.icosahedronAxis = new THREE.AxesHelper (2);
+        this.icosahedronAxis.position.set (4,0,4);
+        this.add (this.icosahedronAxis);
 
     }
   
@@ -267,6 +299,10 @@ class MyScene extends THREE.Scene {
         // The rest of the model is updated
         this.box.update();
         this.cone.update();
+        this.cylinder.update();
+        this.sphere.update();
+        this.torus.update();
+        this.icosahedron.update();
         
         // We tell the renderer "visualize the scene I am showing you using the camera I am passing you".
         this.renderer.render (this, this.getCamera());
