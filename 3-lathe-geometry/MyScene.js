@@ -5,15 +5,11 @@ import { TrackballControls } from '../libs/TrackballControls.js'
 import { Stats } from '../libs/stats.module.js'
 
 // Classes for the scene
-import { Box } from './Box.js'
-import { Cone } from './Cone.js'
-import { Cylinder } from './Cylinder.js'
-import { Sphere } from './Sphere.js'
-import { Torus } from './Torus.js'
-import { Icosahedron } from './Icosahedron.js'
+import { LatheGeometry } from './LatheGeometry.js'
 
 
-// We will use a class derived from Three.js Scene class to manage the scene and everything that happens in it.
+// We will use a class derived from Three.js Scene class to manage the scene 
+//and everything that happens in it.
 class MyScene extends THREE.Scene {
     constructor (myCanvas) {
     
@@ -32,79 +28,66 @@ class MyScene extends THREE.Scene {
 
 
         // We build the different elements that we will have in the scene.
-        // Every element that is to be taken into account in the rendering of the scene must belong to it.
-        // Either as a child of the scene (this in this class) or as a child of an element that is already in the scene.
-        // After creating each element, it will be added to the scene with this.add(variable)
+        // Every element that is to be taken into account in the rendering of 
+        //the scene must belong to it.
+        // Either as a child of the scene (this in this class) or as a child 
+        //of an element that is already in the scene.
+        // After creating each element, it will be added to the scene with 
+        //this.add(variable)
         
 
         // For our scene, we will have a set of elements:
 
-        this.createLights ();                   // We will have a set of lights
-        this.createCamera ();                   // We will have a camera with mouse movement control  
-        //this.createGround ();                   // We will have a ground
+        this.createLights ();       // We will have a set of lights
+        this.createCamera ();       // We will have a camera with mouse movement control  
+        //this.createGround ();                 // We will have a ground
         this.axis = new THREE.AxesHelper (2);   // And some axes
         this.add (this.axis);
         
         
         // Finally we create and add the models to the scene.
 
-        // The model can include its part of the user interface. We pass the reference to
-        // the gui and the text under which the interface controls that the model adds will be grouped.
+        // The model can include its part of the user interface. 
+        //We pass the reference to the gui and the text under which the interface
+        //controls that the model adds will be grouped.
         
-        // Box
-        this.box = new Box(this.gui, "Box Controls");  
-        this.box.position.set (4,0,0);
-        this.add (this.box);
+        // Pawn
+        let pawnPoints = [];
+        pawnPoints.push( new THREE.Vector3(0.001, -1.5, 0) );
+        pawnPoints.push( new THREE.Vector3(1.0, -1.45, 0) );
+        pawnPoints.push( new THREE.Vector3(1.0, -1.1, 0) );
+        pawnPoints.push( new THREE.Vector3(0.5, -0.7, 0) );
+        pawnPoints.push( new THREE.Vector3(0.4, -0.4, 0) );
+        pawnPoints.push( new THREE.Vector3(0.4, 0.5, 0) );
+        pawnPoints.push( new THREE.Vector3(0.5, 0.6, 0) );
+        pawnPoints.push( new THREE.Vector3(0.3, 0.6, 0) );
+        pawnPoints.push( new THREE.Vector3(0.5, 0.8, 0) );
+        pawnPoints.push( new THREE.Vector3(0.55, 1.0, 0) );
+        pawnPoints.push( new THREE.Vector3(0.5, 1.2, 0) );
+        pawnPoints.push( new THREE.Vector3(0.3, 1.45, 0) );
+        pawnPoints.push( new THREE.Vector3(0.001, 1.5, 0) );
 
-        this.boxAxis = new THREE.AxesHelper (2);
-        this.boxAxis.position.set (4,0,0);
-        this.add (this.boxAxis);
+        
 
-        // Cone
-        this.cone = new Cone(this.gui, "Cone Controls");
-        this.cone.position.set (4,4,0);  
-        this.add (this.cone);
 
-        this.coneAxis = new THREE.AxesHelper (2);
-        this.coneAxis.position.set (4,4,0);
-        this.add (this.coneAxis);
+        let points = pawnPoints;
+        
+        //Shape of the points
+        let shapeMaterial = new THREE.MeshLambertMaterial({color: 0x00ffff});
+        let shapeLine = new THREE.BufferGeometry();
+        shapeLine.setFromPoints(points);
 
-        // Cylinder
-        this.cylinder = new Cylinder(this.gui, "Cylinder Controls");
-        this.cylinder.position.set (0,4,0);   
-        this.add (this.cylinder);
+        this.shape = new THREE.Line( shapeLine, shapeMaterial );
+        this.add (this.shape);
 
-        this.cylinderAxis = new THREE.AxesHelper (2);
-        this.cylinderAxis.position.set (0,4,0);
-        this.add (this.cylinderAxis);
+        // Lathe Geometry
+        this.LatheGeometry = new LatheGeometry(this.gui, "Lathe Geometry Controller", points);
 
-        // Sphere
-        this.sphere = new Sphere(this.gui, "Sphere Controls"); 
-        this.sphere.position.set (0,4,4); 
-        this.add (this.sphere);
+        this.LatheAxis = new THREE.AxesHelper(2);
 
-        this.sphereAxis = new THREE.AxesHelper (2);
-        this.sphereAxis.position.set (0,4,4);
-        this.add (this.sphereAxis);
-
-        // Torus
-        this.torus = new Torus(this.gui, "Torus Controls");
-        this.torus.position.set (0,0,4); 
-        this.add (this.torus);
-
-        this.torusAxis = new THREE.AxesHelper (2);
-        this.torusAxis.position.set (0,0,4);
-        this.add (this.torusAxis);
-
-        // Icosahedron
-        this.icosahedron = new Icosahedron(this.gui, "Icosahedron Controls");  
-        this.icosahedron.position.set (4,0,4); 
-        this.add (this.icosahedron);
-
-        this.icosahedronAxis = new THREE.AxesHelper (2);
-        this.icosahedronAxis.position.set (4,0,4);
-        this.add (this.icosahedronAxis);
-
+        this.LatheGeometry.add (this.LatheAxis);
+        this.LatheGeometry.position.set(7,0,0);
+        this.add (this.LatheGeometry);
     }
   
     initStats() {
@@ -135,10 +118,10 @@ class MyScene extends THREE.Scene {
         this.camera = new THREE.PerspectiveCamera(fov, aspectRatioScreen, frustumNearPlane, frustumFarPlane);
 
         // Set camera position
-        this.camera.position.set (10, 5, 10);
+        this.camera.position.set (3, 5, 10);
 
         // Set where the camera is looking
-        var cameraSpotlight = new THREE.Vector3 (0,0,0);
+        var cameraSpotlight = new THREE.Vector3 (3,0,0);
         this.camera.lookAt(cameraSpotlight);
         
         // Add the camera to the scene
@@ -297,12 +280,7 @@ class MyScene extends THREE.Scene {
         this.cameraControl.update();
         
         // The rest of the model is updated
-        this.box.update();
-        this.cone.update();
-        this.cylinder.update();
-        this.sphere.update();
-        this.torus.update();
-        this.icosahedron.update();
+        this.LatheGeometry.update();
         
         // We tell the renderer "visualize the scene I am showing you using the camera I am passing you".
         this.renderer.render (this, this.getCamera());
@@ -322,10 +300,10 @@ $(function () {
     let idHtmlSection = "#WebGL-output";
     var scene = new MyScene(idHtmlSection);
 
-    // Adding the listeners. 
+    // Adding the listeners
     // In this case, the one that will check when the size of the application window is modified.
     window.addEventListener ("resize", () => scene.onWindowResize());
     
-    // We update for the first display
+    // Update for the first display
     scene.update();
 });
