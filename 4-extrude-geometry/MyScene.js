@@ -5,7 +5,9 @@ import { TrackballControls } from '../libs/TrackballControls.js'
 import { Stats } from '../libs/stats.module.js'
 
 // Classes for the scene
-
+import { Lightning } from './Lightning.js'
+import { Heart } from './Heart.js'
+import { CarDock } from './CarDock.js'
 
 
 // We will use a class derived from Three.js Scene class to manage the scene and everything that happens in it.
@@ -45,7 +47,17 @@ class MyScene extends THREE.Scene {
 
         // The model can include its part of the user interface. We pass the reference to
         // the gui and the text under which the interface controls that the model adds will be grouped.
-        
+        this.linghting = new Lightning();
+        this.linghting.position.set (8,0,0);
+        this.add (this.linghting);
+
+        this.heart = new Heart();
+        this.heart.position.set (0,0,8);
+        this.add (this.heart);
+
+        this.carDock = new CarDock();
+        this.carDock.position.set (8,0,8);
+        this.add (this.carDock);
         
 
     }
@@ -74,11 +86,11 @@ class MyScene extends THREE.Scene {
         let fov = 45;   // Field of view, in sexagesimal degrees
         let aspectRatioScreen = window.innerWidth / window.innerHeight;
         let frustumNearPlane = 0.1;//Distance units are in meters
-        let frustumFarPlane = 50;
+        let frustumFarPlane = 100;
         this.camera = new THREE.PerspectiveCamera(fov, aspectRatioScreen, frustumNearPlane, frustumFarPlane);
 
         // Set camera position
-        this.camera.position.set (10, 5, 10);
+        this.camera.position.set (30, 5, 20);
 
         // Set where the camera is looking
         var cameraSpotlight = new THREE.Vector3 (0,0,0);
@@ -240,7 +252,9 @@ class MyScene extends THREE.Scene {
         this.cameraControl.update();
         
         // The rest of the model is updated
-
+        this.linghting.update();
+        this.heart.update();
+        this.carDock.update();
         
         // We tell the renderer "visualize the scene I am showing you using the camera I am passing you".
         this.renderer.render (this, this.getCamera());
