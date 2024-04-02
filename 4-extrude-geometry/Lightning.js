@@ -20,12 +20,12 @@ class Lightning extends THREE.Object3D {
         const lightningShape = new THREE.Shape(lightningShapePoints);
 
         const extrudeSettings = { 
-            depth: 1, 
+            depth: 1,
+            steps: 1,
             bevelEnabled: true, 
-            bevelSegments: 5, 
-            steps: 2, 
-            bevelSize: 1, 
-            bevelThickness: 1 
+            bevelThickness: 1,
+            bevelSize: 1,
+            bevelSegments: 10, 
         };
 
         const geometry = new THREE.ExtrudeGeometry(lightningShape, extrudeSettings );
