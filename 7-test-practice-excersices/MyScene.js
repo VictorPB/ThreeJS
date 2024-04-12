@@ -5,7 +5,9 @@ import { TrackballControls } from '../libs/TrackballControls.js'
 import { Stats } from '../libs/stats.module.js'
 
 // Classes for the scene
-import { GasolineCan } from './GasolineCan.js'
+import { Modelo } from './Modelo.js'
+import { Test1 } from './Test1.js'
+import { Test2 } from './Test2.js'
 
 
 // We will use a class derived from Three.js Scene class to manage the scene and everything that happens in it.
@@ -45,10 +47,15 @@ class MyScene extends THREE.Scene {
 
         // The model can include its part of the user interface. We pass the reference to
         // the gui and the text under which the interface controls that the model adds will be grouped.
-        this.gasolineCan = new GasolineCan();
-        this.gasolineCan.position.set (0,0,0);
-        this.add (this.gasolineCan);
+        //this.modelo1 = new Modelo();
+        //this.modelo1.position.set (0,0,0);
+        //this.add (this.modelo1);
 
+        //this.test1 = new Test1();
+        //this.add (this.test1);
+
+        this.test2 = new Test2();
+        this.add (this.test2);
     }
   
     initStats() {
@@ -253,7 +260,9 @@ class MyScene extends THREE.Scene {
         this.cameraControl.update();
         
         // The rest of the model is updated
-        this.gasolineCan.update();
+        //this.modelo1.update();
+        //this.test1.update();
+        this.test2.update();
 
         // We tell the renderer "visualize the scene I am showing you using the camera I am passing you".
         this.renderer.render (this, this.getCamera());

@@ -1,4 +1,4 @@
-// Imports of Three.js libraryç
+// Imports of Three.js library
 import * as THREE from '../libs/three.module.js'
 
 class Circuit extends THREE.Object3D {

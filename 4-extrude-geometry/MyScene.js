@@ -58,7 +58,7 @@ class MyScene extends THREE.Scene {
         this.carDock = new CarDock();
         this.carDock.position.set (8,0,8);
         this.add (this.carDock);
-        
+       
 
     }
   
