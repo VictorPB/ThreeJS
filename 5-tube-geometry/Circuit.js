@@ -10,10 +10,13 @@ class Circuit extends THREE.Object3D {
         let pathPoints = [];
 
         
+        
+
+
 
         //--------------------Spiral segment--------------------
         let spiralHeigth = 10;
-        let spiralRadius = 2;
+        let spiralRadius = 1.5;
         let spiralHeigthSegments = 5;
         let spiralSegments = spiralRadius*(2.0 * Math.PI);  
 
@@ -27,10 +30,28 @@ class Circuit extends THREE.Object3D {
             }
         }
         //------------------------------------------------------
-        pathPoints.push(new THREE.Vector3(3, 50, -10));
-        pathPoints.push(new THREE.Vector3(3, 0, -10));
-        
 
+        pathPoints.push(new THREE.Vector3(15,50,20));
+
+        //--------------------ZigZag segment--------------------
+        /*let zigzagRadius = 1.5;
+        let zigzagSegments = 8;
+        for(let i=50; i>0; i = i - 0.1){
+            let theta =  (i / zigzagSegments) * 2.0 * Math.PI;
+            let x = zigzagRadius * Math.sin(theta);
+            pathPoints.push(new THREE.Vector3(20+x, i, -10));
+        }
+        */
+        //------------------------------------------------------
+
+        pathPoints.push(new THREE.Vector3(15,-20,20));
+        pathPoints.push(new THREE.Vector3(20,-20,0));
+        pathPoints.push(new THREE.Vector3(20,20,0));
+        pathPoints.push(new THREE.Vector3(0,20,20));
+        pathPoints.push(new THREE.Vector3(0,0,30));
+        pathPoints.push(new THREE.Vector3(20,0,40));
+        pathPoints.push(new THREE.Vector3(30,0,30));
+        
 
         let path = new THREE.CatmullRomCurve3(pathPoints,true);//true to close the curve
 
@@ -55,7 +76,7 @@ class Circuit extends THREE.Object3D {
 
 
     update () {
-		
+		//this.rotation.y += 0.01;
     }
 
 }

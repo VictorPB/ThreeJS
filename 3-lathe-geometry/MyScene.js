@@ -68,9 +68,24 @@ class MyScene extends THREE.Scene {
         pawnPoints.push( new THREE.Vector3(0.001, 1.5, 0) );
 
         
+        // Battery
+        let batteryPoints = [];
+        batteryPoints.push( new THREE.Vector3(0.0, 1.0, 0) );
+        batteryPoints.push( new THREE.Vector3(0.3, 1.0, 0) );
+        batteryPoints.push( new THREE.Vector3(0.3, 0.7, 0) );
+        batteryPoints.push( new THREE.Vector3(1.0, 0.7, 0) );
+        batteryPoints.push( new THREE.Vector3(1.0, -1.0, 0) );
+        batteryPoints.push( new THREE.Vector3(0.0, -1.0, 0) );
 
 
-        let points = pawnPoints;
+        // Gas Tank
+        let gastankPoints = [];
+        gastankPoints.push( new THREE.Vector3(0.0, 1.0, 0) );
+
+
+        //let points = pawnPoints;
+        let points = batteryPoints;
+        //let points = gastankPoints;
         
         //Shape of the points
         let shapeMaterial = new THREE.MeshLambertMaterial({color: 0x00ffff});

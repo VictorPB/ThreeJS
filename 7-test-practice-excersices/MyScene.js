@@ -86,7 +86,7 @@ class MyScene extends THREE.Scene {
         this.camera = new THREE.PerspectiveCamera(fov, aspectRatioScreen, frustumNearPlane, frustumFarPlane);
 
         // Set camera position
-        this.camera.position.set (30, 5, 20);
+        this.camera.position.set (10, 5, 8);
 
         // Set where the camera is looking
         var cameraSpotlight = new THREE.Vector3 (0,0,0);

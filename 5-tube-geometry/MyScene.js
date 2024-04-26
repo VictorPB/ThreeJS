@@ -75,14 +75,14 @@ class MyScene extends THREE.Scene {
         let fov = 45;   // Field of view, in sexagesimal degrees
         let aspectRatioScreen = window.innerWidth / window.innerHeight;
         let frustumNearPlane = 0.1;//Distance units are in meters
-        let frustumFarPlane = 100;
+        let frustumFarPlane = 200;
         this.camera = new THREE.PerspectiveCamera(fov, aspectRatioScreen, frustumNearPlane, frustumFarPlane);
 
         // Set camera position
-        this.camera.position.set (30, 5, 20);
+        this.camera.position.set (50, 15, 50);
 
         // Set where the camera is looking
-        var cameraSpotlight = new THREE.Vector3 (0,0,0);
+        var cameraSpotlight = new THREE.Vector3 (0,20,0);
         this.camera.lookAt(cameraSpotlight);
         
         // Add the camera to the scene
